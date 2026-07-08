@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'core/theme/app_theme.dart';
-import 'screens/dashboard/dashboard_screen.dart';
+import 'screens/auth/login_screen.dart';
 
 void main() {
   runApp(const MedicalAIApp());
@@ -14,7 +14,7 @@ class MedicalAIApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const DashboardScreen(),
+      home: const LoginScreen(),
     );
   }
 }
