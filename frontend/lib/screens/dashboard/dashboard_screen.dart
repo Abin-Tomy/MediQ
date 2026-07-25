@@ -11,6 +11,10 @@ import 'widgets/quick_actions_grid.dart';
 import 'widgets/daily_tip_card.dart';
 import 'widgets/dashboard_bottom_nav.dart';
 import '../symptom/ai_welcome_screen.dart';
+import '../appointment/appointments_screen.dart';
+import '../report/report_upload_screen.dart';
+import '../profile/profile_screen.dart';
+import '../doctor/doctor_list_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   final String userName;
@@ -95,9 +99,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
       bottomNavigationBar: DashboardBottomNav(
         currentIndex: currentIndex,
         onTap: (index) {
-          setState(() {
-            currentIndex = index;
-          });
+          if (index == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const AppointmentsScreen()),
+            );
+          } else if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const ReportUploadScreen()),
+            );
+          } else if (index == 3) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const ProfileScreen()),
+            );
+          } else {
+            setState(() {
+              currentIndex = index;
+            });
+          }
         },
       ),
 
@@ -228,7 +249,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
               //-------------------------------------------------------
 
               DashboardSearchBar(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const DoctorListScreen()),
+                  );
+                },
               ),
 
               const SizedBox(height: 34),

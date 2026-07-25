@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'body_area_screen.dart';
+import 'visual_scan_screen.dart';
 
 class AIWelcomeScreen extends StatelessWidget {
   const AIWelcomeScreen({super.key});
@@ -8,51 +10,93 @@ class AIWelcomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            children: [
-              const Spacer(),
-              Container(
-                width: 120,
-                height: 120,
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFF2F80ED), Color(0xFF56CCF2)],
+        child: Center(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 10),
+                Container(
+                  width: 120,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF2F80ED), Color(0xFF56CCF2)],
+                    ),
+                    borderRadius: BorderRadius.circular(32),
                   ),
-                  borderRadius: BorderRadius.circular(32),
+                  child: const Icon(Icons.smart_toy_rounded,
+                      color: Colors.white, size: 64),
                 ),
-                child: const Icon(Icons.smart_toy_rounded,
-                    color: Colors.white, size: 64),
-              ),
-              const SizedBox(height: 28),
-              const Text('AI Health Assistant',
-                  style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold)),
-              const SizedBox(height: 20),
-              const Text(
-                "Hello Vishnu 👋\n\nI'm here to understand how you're feeling today.\n\nI'll ask a few simple questions before analyzing your symptoms.\n\nThis usually takes less than 30 seconds.",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 17,height: 1.6),
-              ),
-              const SizedBox(height: 28),
-              _feature(Icons.psychology_alt_rounded,'AI Symptom Analysis'),
-              const SizedBox(height: 12),
-              _feature(Icons.medical_information_outlined,'Medical Knowledge'),
-              const SizedBox(height: 12),
-              _feature(Icons.local_hospital_outlined,'Doctor Recommendation'),
-              const Spacer(),
-              SizedBox(
-                width: double.infinity,
-                height: 58,
-                child: FilledButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.arrow_forward_rounded),
-                  label: const Text('Continue'),
+                const SizedBox(height: 28),
+                const Text('AI Health Assistant',
+                    style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold)),
+                const SizedBox(height: 20),
+                const Text(
+                  "Hello Vishnu 👋\n\nI'm here to understand how you're feeling today.\n\nI'll ask a few simple questions before analyzing your symptoms.\n\nThis usually takes less than 30 seconds.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 17,height: 1.6),
                 ),
-              ),
-              const SizedBox(height: 16),
-              const Text('Step 1 of 6',style: TextStyle(color: Colors.grey)),
-            ],
+                const SizedBox(height: 28),
+                _feature(Icons.psychology_alt_rounded,'AI Symptom Analysis'),
+                const SizedBox(height: 12),
+                _feature(Icons.medical_information_outlined,'Medical Knowledge'),
+                const SizedBox(height: 12),
+                _feature(Icons.local_hospital_outlined,'Doctor Recommendation'),
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  height: 56,
+                  child: FilledButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const BodyAreaScreen(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.psychology_alt_rounded),
+                    label: const Text(
+                      'Start Text Symptom Check (Model 1)',
+                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  height: 56,
+                  child: OutlinedButton.icon(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: const Color(0xFF2F80ED),
+                      side: const BorderSide(color: Color(0xFF2F80ED), width: 1.5),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const VisualScanScreen(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.camera_alt_rounded),
+                    label: const Text(
+                      'Scan Rash / Lesion (Model 2 YOLO)',
+                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 14),
+                const Text('Select AI Model Mode', style: TextStyle(color: Colors.grey, fontSize: 13)),
+                const SizedBox(height: 10),
+              ],
+            ),
           ),
         ),
       ),
