@@ -120,7 +120,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                 padding: const EdgeInsets.fromLTRB(24, 10, 24, 30),
                 physics: const BouncingScrollPhysics(),
                 itemCount: appointments.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 16),
+                separatorBuilder: (context, index) => const SizedBox(height: 16),
                 itemBuilder: (_, index) {
                   final app = appointments[index];
                   return _buildAppointmentCard(app);

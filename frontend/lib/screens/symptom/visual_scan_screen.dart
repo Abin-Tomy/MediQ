@@ -253,7 +253,7 @@ class _VisualScanScreenState extends State<VisualScanScreen>
                       if (_isScanning)
                         AnimatedBuilder(
                           animation: _scannerAnimationController,
-                          builder: (_, __) {
+                          builder: (context, child) {
                             return Positioned(
                               top: 300 * _scannerAnimationController.value,
                               left: 0,

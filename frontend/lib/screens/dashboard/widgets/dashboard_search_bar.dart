@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_text_styles.dart';
 
 class DashboardSearchBar extends StatelessWidget {
   final VoidCallback? onTap;
@@ -12,64 +13,60 @@ class DashboardSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(22),
-        onTap: onTap,
-        child: Ink(
-          height: 64,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(22),
-            boxShadow: const [
-              BoxShadow(
-                color: AppColors.shadow,
-                blurRadius: 18,
-                offset: Offset(0, 8),
-              ),
-            ],
-          ),
-          child: Row(
-            children: [
-              const SizedBox(width: 20),
-
-              const Icon(
-                Icons.search_rounded,
-                color: AppColors.primary,
-                size: 28,
-              ),
-
-              const SizedBox(width: 16),
-
-              const Expanded(
-                child: Text(
-                  "Search symptoms, doctors, reports...",
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: AppColors.textHint,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-
-              Container(
-                margin: const EdgeInsets.only(right: 12),
-                width: 44,
-                height: 44,
+    return Row(
+      children: [
+        Expanded(
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(28),
+              onTap: onTap,
+              child: Ink(
+                height: 56,
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withValues(alpha: .12),
-                  borderRadius: BorderRadius.circular(14),
+                  color: AppColors.background,
+                  borderRadius: BorderRadius.circular(28),
+                  border: Border.all(color: AppColors.border),
                 ),
-                child: const Icon(
-                  Icons.mic_none_rounded,
-                  color: AppColors.primary,
+                child: Row(
+                  children: [
+                    const SizedBox(width: 20),
+                    const Icon(
+                      Icons.search_rounded,
+                      color: AppColors.textHint,
+                      size: 24,
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        "Search a doctor, medicines, etc...",
+                        style: AppTextStyles.body.copyWith(
+                          color: AppColors.textHint,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
+            ),
           ),
         ),
-      ),
+        const SizedBox(width: 16),
+        Container(
+          width: 56,
+          height: 56,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(28),
+            border: Border.all(color: AppColors.border),
+          ),
+          child: const Icon(
+            Icons.mic_none_rounded,
+            color: AppColors.textPrimary,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'core/theme/app_theme.dart';
+import 'core/theme/app_theme_provider.dart';
+import 'core/routing/app_router.dart';
 import 'screens/auth/login_screen.dart';
 
 void main() {
@@ -11,10 +12,18 @@ class MedicalAIApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      home: const LoginScreen(),
+    return AnimatedBuilder(
+      animation: AppThemeProvider(),
+      builder: (context, _) {
+        final theme = AppThemeProvider();
+        return MaterialApp(
+          title: 'MediQ',
+          debugShowCheckedModeBanner: false,
+          theme: theme.themeData,
+          onGenerateRoute: AppRouter.generateRoute,
+          home: const LoginScreen(),
+        );
+      },
     );
   }
 }

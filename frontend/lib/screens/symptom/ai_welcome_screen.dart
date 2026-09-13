@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'body_area_screen.dart';
 import 'visual_scan_screen.dart';
+import '../report/report_upload_screen.dart';
 
 class AIWelcomeScreen extends StatelessWidget {
   const AIWelcomeScreen({super.key});
@@ -19,16 +20,22 @@ class AIWelcomeScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 10),
                 Container(
-                  width: 120,
-                  height: 120,
+                  width: 140,
+                  height: 140,
                   decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [Color(0xFF2F80ED), Color(0xFF56CCF2)],
+                    shape: BoxShape.circle,
+                    image: const DecorationImage(
+                      image: AssetImage('assets/images/ai_avatar.jpg'),
+                      fit: BoxFit.cover,
                     ),
-                    borderRadius: BorderRadius.circular(32),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFF2F80ED).withOpacity(0.3),
+                        blurRadius: 24,
+                        offset: const Offset(0, 8),
+                      ),
+                    ],
                   ),
-                  child: const Icon(Icons.smart_toy_rounded,
-                      color: Colors.white, size: 64),
                 ),
                 const SizedBox(height: 28),
                 const Text('AI Health Assistant',
@@ -88,6 +95,33 @@ class AIWelcomeScreen extends StatelessWidget {
                     icon: const Icon(Icons.camera_alt_rounded),
                     label: const Text(
                       'Scan Rash / Lesion (Model 2 YOLO)',
+                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  height: 56,
+                  child: OutlinedButton.icon(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: const Color(0xFF27AE60),
+                      side: const BorderSide(color: Color(0xFF27AE60), width: 1.5),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const ReportUploadScreen(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.description_rounded),
+                    label: const Text(
+                      'Upload Lab Report (Model 3 T5)',
                       style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                     ),
                   ),

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import '../../core/theme/app_theme_provider.dart';
 import '../../models/body_area.dart';
 import '../../models/symptom_analysis.dart';
 import 'symptom_input_screen.dart';
+import 'widgets/anatomical_body_diagram.dart';
 
 class BodyAreaScreen extends StatefulWidget {
   const BodyAreaScreen({super.key});
@@ -16,161 +19,191 @@ class _BodyAreaScreenState extends State<BodyAreaScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
+    return AnimatedBuilder(
+      animation: AppThemeProvider(),
+      builder: (context, _) {
+        final theme = AppThemeProvider();
 
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: const Text("Where does it hurt?"),
-      ),
+        final title = theme.tr("Where does it hurt?", "എവിടെയാണ് ബുദ്ധിമുട്ട്?");
+        final subtitle = theme.tr(
+          "Tap the anatomical diagram or select a zone below.",
+          "ഡയഗ്രാമിലോ താഴെയുള്ള ലിസ്റ്റിലോ തൊടുക.",
+        );
+        final continueLbl = theme.tr("Continue", "തുടരുക");
 
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-
-          children: [
-
-            const Text(
-              "Select the area where you're experiencing discomfort.",
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 16,
+        return Scaffold(
+          backgroundColor: theme.background,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            iconTheme: IconThemeData(color: theme.textPrimary),
+            title: Text(
+              title,
+              style: GoogleFonts.poppins(
+                fontWeight: FontWeight.w600,
+                color: theme.textPrimary,
               ),
             ),
-
-            const SizedBox(height: 24),
-
-            Expanded(
-              child: GridView.builder(
-                itemCount: BodyArea.items.length,
-
-                gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 1,
+          ),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  subtitle,
+                  style: GoogleFonts.poppins(
+                    color: theme.textSecondary,
+                    fontSize: 14,
+                  ),
                 ),
 
-                itemBuilder: (context, index) {
-                  final area = BodyArea.items[index];
+                const SizedBox(height: 18),
 
-                  final isSelected = selected == area;
+                // ANATOMICAL BODY MAPPER
+                AnatomicalBodyDiagram(
+                  selectedArea: selected,
+                  onAreaSelected: (area) {
+                    setState(() {
+                      selected = area;
+                    });
+                  },
+                ),
 
-                  return InkWell(
-                    borderRadius: BorderRadius.circular(22),
+                const SizedBox(height: 20),
 
-                    onTap: () {
-                      setState(() {
-                        selected = area;
-                      });
-                    },
+                Text(
+                  theme.tr("Or choose from categories:", "അല്ലെങ്കിൽ താഴെ നിന്ന് തിരഞ്ഞെടുക്കുക:"),
+                  style: GoogleFonts.poppins(
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w600,
+                    color: theme.textSecondary,
+                  ),
+                ),
 
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 250),
+                const SizedBox(height: 12),
 
-                      decoration: BoxDecoration(
-                        color: isSelected
-                            ? const Color(0xFFEAF4FF)
-                            : Colors.white,
+                // COMPACT CHIPS GRID
+                Expanded(
+                  child: GridView.builder(
+                    itemCount: BodyArea.items.length,
+                    physics: const BouncingScrollPhysics(),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                      childAspectRatio: 1.3,
+                    ),
+                    itemBuilder: (context, index) {
+                      final area = BodyArea.items[index];
+                      final isSelected = selected == area;
 
-                        borderRadius: BorderRadius.circular(22),
-
-                        border: Border.all(
-                          color: isSelected
-                              ? const Color(0xFF2F80ED)
-                              : Colors.grey.shade300,
-                          width: isSelected ? 2 : 1,
-                        ),
-
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(.05),
-                            blurRadius: 12,
-                            offset: const Offset(0, 6),
-                          ),
-                        ],
-                      ),
-
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-
-                        children: [
-
-                          Icon(
-                            area.icon,
-                            size: 42,
+                      return InkWell(
+                        borderRadius: BorderRadius.circular(16),
+                        onTap: () {
+                          setState(() {
+                            selected = area;
+                          });
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 250),
+                          decoration: BoxDecoration(
                             color: isSelected
-                                ? const Color(0xFF2F80ED)
-                                : Colors.black87,
-                          ),
-
-                          const SizedBox(height: 12),
-
-                          Text(
-                            area.name,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
+                                ? theme.primaryAccent.withValues(alpha: .15)
+                                : theme.cardColor,
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
                               color: isSelected
-                                  ? const Color(0xFF2F80ED)
-                                  : Colors.black87,
+                                  ? theme.primaryAccent
+                                  : theme.borderColor,
+                              width: isSelected ? 2 : 1,
                             ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withValues(alpha: .04),
+                                blurRadius: 8,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
                           ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                area.icon,
+                                size: 26,
+                                color: isSelected
+                                    ? theme.primaryAccent
+                                    : theme.textPrimary,
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                area.name,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.poppins(
+                                  fontWeight: isSelected
+                                      ? FontWeight.w700
+                                      : FontWeight.w500,
+                                  fontSize: 12,
+                                  color: isSelected
+                                      ? theme.primaryAccent
+                                      : theme.textPrimary,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
 
-                          if (isSelected) ...[
-                            const SizedBox(height: 10),
-                            const Icon(
-                              Icons.check_circle,
-                              color: Color(0xFF27AE60),
-                            ),
-                          ],
-                        ],
+                const SizedBox(height: 16),
+
+                // CONTINUE BUTTON
+                SizedBox(
+                  width: double.infinity,
+                  height: 56,
+                  child: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: theme.primaryAccent,
+                      foregroundColor: Colors.white,
+                      disabledBackgroundColor: theme.borderColor,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18),
                       ),
                     ),
-                  );
-                },
-              ),
-            ),
-
-            const SizedBox(height: 18),
-
-            SizedBox(
-              width: double.infinity,
-              height: 58,
-
-              child: FilledButton.icon(
-                icon: const Icon(Icons.arrow_forward_rounded),
-
-                label: const Text(
-                  "Continue",
-                  style: TextStyle(fontSize: 17),
+                    icon: const Icon(Icons.arrow_forward_rounded, size: 20),
+                    label: Text(
+                      continueLbl,
+                      style: GoogleFonts.poppins(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    onPressed: selected == null
+                        ? null
+                        : () {
+                            final analysis = SymptomAnalysis();
+                            analysis.bodyArea = selected!.name;
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => SymptomInputScreen(
+                                  analysis: analysis,
+                                ),
+                              ),
+                            );
+                          },
+                  ),
                 ),
-
-                onPressed: selected == null
-                    ? null
-                    : () {
-                        final analysis = SymptomAnalysis();
-
-                        analysis.bodyArea = selected!.name;
-
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => SymptomInputScreen(
-                              analysis: analysis,
-                            ),
-                          ),
-                        );
-                      },
-              ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
