@@ -59,3 +59,46 @@ desktop.ini
 # ============================================================
 *.log
 logs/
+
+# ============================================================
+# AI Model Artefacts — DO NOT COMMIT TRAINED WEIGHTS
+# ============================================================
+# The models/ directory holds trained weights that are generated
+# in Google Colab and deployed manually — never tracked in git.
+models/
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.onnx
+*.pkl
+
+# ============================================================
+# Datasets, Raw Images & Training Data — NEVER COMMIT
+# ============================================================
+# Root dataset directory (CSVs, raw archives, image dumps)
+dataset/*
+!dataset/.gitignore
+!dataset/.gitkeep
+!dataset/README.md
+
+# All training datasets across image, report, and symptom pipelines
+**/datasets/
+**/processed/
+!**/processed/label_mapping/
+!**/processed/label_mapping/*.json
+
+# Training runs, checkpoints, and cache
+checkpoints/
+runs/
+.cache/
+
+# Large archives and serialized dataset formats
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.arrow
+*.parquet
+*.h5
+*.hdf5

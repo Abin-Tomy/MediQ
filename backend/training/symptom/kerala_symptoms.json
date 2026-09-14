@@ -1,0 +1,50 @@
+{
+  "description": "Kerala-relevant endemic conditions and representative symptom profiles for augmenting the DiseaseSymptom Knowledge Base dataset.",
+  "conditions": [
+    {
+      "condition": "Nipah",
+      "specialist": "Infectious Disease Specialist / Neurologist",
+      "urgency": "emergency",
+      "symptom_profiles": [
+        "fever, headache, cough, sore throat, difficulty breathing, shortness of breath",
+        "high fever, acute headache, dizziness, mental confusion, drowsiness, disorientation",
+        "fever, respiratory distress, breathlessness, cough, altered mental status, drowsiness",
+        "severe fever, sudden encephalitis signs, disorientation, blurred vision, headache, vomiting",
+        "fever, headache, breathing difficulty, drowsiness, confusion, seizures, lethargy",
+        "fever, sore throat, severe respiratory distress, acute encephalitis, neurological deficit",
+        "high fever, headache, body ache, rapid breathing, breathlessness, drowsiness",
+        "fever, cough, shortness of breath, acute neurological symptoms, confusion, coma risk"
+      ]
+    },
+    {
+      "condition": "Chikungunya",
+      "specialist": "General Physician / Rheumatologist",
+      "urgency": "moderate",
+      "symptom_profiles": [
+        "sudden high fever, severe joint pain, joint swelling, muscle pain, skin rash",
+        "high fever, debilitating polyarthralgia, joint stiffness, rash, headache, fatigue",
+        "fever, severe joint ache in hands and feet, swollen joints, body ache, red rash",
+        "acute fever, pain in multiple joints, joint inflammation, fatigue, nausea, rash",
+        "fever, severe arthralgia, difficulty walking due to joint pain, rash on trunk",
+        "high fever, persistent joint pain, swelling in wrists and ankles, headache, chills",
+        "fever, joint tenderness, morning stiffness in joints, body pain, maculopapular rash",
+        "acute febrile illness, intense joint ache, backache, skin eruption, nausea"
+      ]
+    },
+    {
+      "condition": "Leptospirosis",
+      "specialist": "Infectious Disease Specialist / Nephrologist",
+      "urgency": "high",
+      "symptom_profiles": [
+        "high fever, severe calf pain, calf tenderness, conjunctival suffusion, red eyes, chills",
+        "fever, floodwater exposure, severe muscle ache in calves and back, headache, vomiting",
+        "acute high fever, jaundice, yellow eyes, dark urine, muscle pain, calf tenderness",
+        "fever, chills, bloodshot eyes, severe headache, contaminated water exposure, nausea",
+        "high fever, calf tenderness, oliguria, jaundice, abdominal pain, diarrhea, chills",
+        "fever, conjunctival redness, intense muscular pain, headache, exposure to sewage or flood",
+        "sudden fever, chills, calf pain, yellow skin, liver tenderness, renal impairment signs",
+        "high fever, severe body ache, calf tenderness, red eyes without discharge, headache"
+      ]
+    }
+  ]
+}

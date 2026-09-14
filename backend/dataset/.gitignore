@@ -1,0 +1,10 @@
+# ============================================================
+# MediQ Dataset Directory
+# ============================================================
+# Ignore all dataset files, raw data, archives, and annotations
+*
+
+# Whitelist gitignore and documentation/keep files
+!.gitignore
+!.gitkeep
+!README.md
