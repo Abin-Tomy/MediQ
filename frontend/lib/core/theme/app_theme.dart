@@ -9,7 +9,7 @@ class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
-      fontFamily: GoogleFonts.poppins().fontFamily,
+      fontFamily: GoogleFonts.inter().fontFamily,
 
       scaffoldBackgroundColor: AppColors.background,
 
@@ -73,7 +73,7 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          textStyle: GoogleFonts.poppins(
+          textStyle: GoogleFonts.inter(
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
